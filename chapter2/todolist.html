@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Hello World</title>
@@ -9,10 +9,12 @@
 <div id="app">
 
     <input type="text" v-model="inputValue">
-    <button v-on:click="handleBtnClick">提交</button>
+    <button @click="handleBtnClick">提交</button>
     <ul>
-	<todo-item v-bind:content="item"
-		   v-for="item in list">
+	<todo-item :content="item"
+		   :index="index"
+		   v-for="(item, index) in list"
+		   @delete="handleItemDelete">
 	</todo-item>
     </ul>
 </div>
@@ -26,8 +28,13 @@
     // });
 
     var TodoItem = {
-        props: ['content'],
-        template: "<li>{{content}}</li>"
+        props: ['content', 'index'],
+        template: "<li @click='handleItemClick'>{{content}}</li>",
+        methods: {
+            handleItemClick: function () {
+                this.$emit('delete', this.index);
+            }
+        }
     };
 
     var app = new Vue({
@@ -43,6 +50,9 @@
             handleBtnClick: function () {
                 this.list.push(this.inputValue);
                 this.inputValue = '';
+            },
+            handleItemDelete: function (index) {
+                this.list.splice(index, 1);
             }
         }
     });
