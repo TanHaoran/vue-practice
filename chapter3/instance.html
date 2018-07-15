@@ -2,32 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>Vue实例</title>
     <script src="../vue.js"></script>
 </head>
 <body>
-<div id="root">
-    <div @click="handleClick">
-        {{message}}
-    </div>
-    <item></item>
-</div>
+<div id="app"></div>
 
 <script>
-
-    Vue.component('item' , {
-        template: '<div>hello item</div>'
-    });
-
+    // 生命周期函数就是Vue实例在某一个时间点会自动执行的函数
     var vm = new Vue({
-        el: '#root',
+        el: '#app',
+        template: '<div>{{test}}</div>',
         data: {
-            message: 'Hello world'
+            test: 'hello world'
         },
-        methods: {
-            handleClick:function () {
-                alert('hello');
-            }
+        beforeCreate: function () {
+            console.log('beforeCreate');
+        },
+        created: function () {
+            console.log('created');
+        },
+        beforeMount: function () {
+            console.log('beforeMount');
+            console.log(this.$el);
+        },
+        mounted: function () {
+            console.log('mounted');
+            console.log(this.$el);
+        },
+        beforeDestroy: function () {
+            console.log('beforeDestroy');
+        },
+        destroyed: function () {
+            console.log('destroyed');
+        },
+        beforeUpdate: function () {
+            console.log('beforeUpdate');
+        },
+        updated: function () {
+            console.log('updated');
         }
     });
 
