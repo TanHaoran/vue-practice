@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue条件渲染</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- v-if和v-else要放在一起使用-->
+    <div v-if="show" data-test="v-if">{{message}}</div>
+    <div v-else="show" data-test="v-if">Bye world</div>
+    <!-- 频繁控制显示隐藏时，性能高点 -->
+    <div v-show="show" data-test="v-show">{{message}}</div>
+
+    <div v-if="showLetter === 'a'">This is A</div>
+    <div v-else-if="showLetter === 'b'">This is B</div>
+    <div v-else>This is others</div>
+
+    <!-- 使用key值可以有效的避免页面重复利用而导致的数据未清空-->
+    <div v-if="showKey">
+        用户名：<input key="username"/>
+    </div>
+    <div v-else>
+        邮箱：<input key="email"/>
+    </div>
+</div>
+
+<script>
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: false,
+            message: 'Hello world',
+            showLetter: 'a',
+            showKey: false
+        }
+    });
+
+</script>
+</body>
+</html>
