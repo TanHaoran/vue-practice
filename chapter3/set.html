@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue列表渲染</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <div v-for="(item, key, index) of userInfo">
+	{{item}} --- {{key}} --- {{index}}
+    </div>
+    <div v-for="(item) of userIndexes">
+	{{item}}
+    </div>
+</div>
+
+<script>
+
+    // push pop shift unshift splice sort reverse
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            userInfo: {
+                name: 'jerry',
+                age: 29,
+                gender: 'male',
+                salary: 'secret'
+            },
+            userIndexes: [1, 2, 3, 4]
+        }
+    });
+
+    // 也可以通过Vue.set方法新增对象的属性
+    Vue.set(vm.userInfo, 'email', 'thr@buzzly.cn');
+
+    // 也可以通过vm.$set设置新属性
+    vm.$set(vm.userInfo, 'password', '123456');
+
+    // 通过改变数组的内容改变页面显示
+    Vue.set(vm.userIndexes, 1, 5)
+    // 或者
+    vm.$set(vm.userIndexes, 2, 6);
+
+</script>
+</body>
+</html>
