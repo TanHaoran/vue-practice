@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue模板语法</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{fullName}}
+    {{age}}
+</div>
+
+<script>
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Jerry',
+            lastName: 'Tan',
+            fullName: 'Jerry Tan',
+            age: 28
+        },
+        // 方法一：计算属性（推荐优先使用）
+        computed: {
+            fullName: function () {
+                console.log('computed执行了一次');
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+        // 方法二：方法
+        // methods: {
+        //     fullName: function () {
+        //         console.log('methods执行了一次');
+        //         return this.firstName + ' ' + this.lastName;
+        //     }
+        // }
+        // 方法三：监听器
+        // watch: {
+        //     firstName: function () {
+        //         console.log('firstName执行了一次');
+        //         this.fullName = this.firstName+ ' ' + this.lastName;
+        //     },
+        //     lastName: function () {
+        //         console.log('lastName执行了一次');
+        //         this.fullName = this.firstName+ ' ' + this.lastName;
+        //     }
+        // }
+    });
+
+</script>
+</body>
+</html>
