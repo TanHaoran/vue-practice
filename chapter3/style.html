@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue模板语法</title>
+    <script src="../vue.js"></script>
+    <style>
+        .activated {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div @click="handleDivClick"
+         :class="{activated: isActivated}">class方法一
+    </div>
+    <div @click="handleDivClick2"
+         :class="[activated, activatedOne]">class方法二
+    </div>
+    <div @click="handleDivClick3"
+         :style="styleObj">
+        style方法一
+    </div>
+    <div :style="[styleObj2, {fontSize: '20px'}]">
+        style方法二
+    </div>
+</div>
+
+<script>
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActivated: false,
+            activated: '',
+            activatedOne: 'activated-one',
+            styleObj: {
+                color: 'black'
+            },
+            styleObj2: {
+                color: 'black'
+            }
+        },
+        methods: {
+            handleDivClick: function () {
+                this.isActivated = !this.isActivated;
+            },
+            handleDivClick2: function () {
+                this.activated = this.activated === 'activated' ? '' : 'activated';
+            },
+            handleDivClick3: function () {
+                this.styleObj.color = this.styleObj.color === 'black' ? 'red' : 'black';
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
