@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件使用中的细节点</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="root">
+
+    <!-- 同理，在ul、ol、select标签内建议使用is属性 -->
+    <table>
+        <tbody>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+        <tr is="row2"></tr>
+        <tr is="row2"></tr>
+        <tr is="row2"></tr>
+        </tbody>
+    </table>
+
+    <!-- 在标签中通过this.$refs获取到的内容是标签对应的doc元素-->
+    <div ref="hello" @click="handleClick">hello world</div>
+
+    <!-- 在组件中通过this.$refs获取到的内容是子组件的引用-->
+    <counter ref="one" @change="handleChange"></counter>
+    <counter ref="two" @change="handleChange"></counter>
+    <div>{{total}}</div>
+
+</div>
+
+<script>
+
+    Vue.component('row', {
+        template: '<tr><td>this is a row</td></tr>'
+    });
+
+    // 在子组件中定义对象时，对象必须是一个函数
+    Vue.component('row2', {
+        data: function () {
+            return {
+                content: 'this is content'
+            }
+        },
+        template: '<tr><td>{{content}}</td></tr>'
+    });
+
+    Vue.component('counter', {
+        data: function () {
+            return {
+                number: 0
+            }
+        },
+        template: '<div @click="handleCounter">{{number}}</div>',
+        methods: {
+            handleCounter: function () {
+                this.number++;
+                this.$emit('change');
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el: '#root',
+        methods: {
+            handleClick: function () {
+                alert(this.$refs.hello.innerHTML);
+            },
+            handleChange: function () {
+                console.log(this.$refs.one.number);
+                console.log(this.$refs.two.number);
+                this.total = this.$refs.one.number + this.$refs.two.number;
+            }
+        },
+        data: {
+            total: 0
+        }
+    });
+
+</script>
+</body>
+</html>

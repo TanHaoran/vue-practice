@@ -11,11 +11,11 @@
     <input type="text" v-model="inputValue">
     <button @click="handleBtnClick">提交</button>
     <ul>
-	<todo-item :content="item"
-		   :index="index"
-		   v-for="(item, index) in list"
-		   @delete="handleItemDelete">
-	</todo-item>
+        <todo-item :content="item"
+                   :index="index"
+                   v-for="(item, index) in list"
+                   @delete="handleItemDelete">
+        </todo-item>
     </ul>
 </div>
 

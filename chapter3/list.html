@@ -9,16 +9,16 @@
 <div id="app">
 
     <template v-for="(item, index) of list" :key="item.id">
-	<div>
-	    {{item.text}} --- {{index}}
-	</div>
-	<span>
+        <div>
+            {{item.text}} --- {{index}}
+        </div>
+        <span>
 	    {{item.text}} --- {{index}}
     	</span>
     </template>
 
     <div v-for="(item, key, index) of userInfo">
-	{{item}} --- {{key}} --- {{index}}
+        {{item}} --- {{key}} --- {{index}}
     </div>
 </div>
 
